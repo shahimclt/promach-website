@@ -93,7 +93,7 @@ if($_POST) {
     
         if (move_uploaded_file($_FILES['visitor_resume']['tmp_name'], $uploadfile)) {
             // Upload handled successfully
-            if (!$mail->addAttachment($uploadfile, 'Resume_'.$visitor_name.'_'.$visitor_email)) {
+            if (!$mail->addAttachment($uploadfile, 'Resume_'.$visitor_name.'_'.$visitor_email.'.'.$ext)) {
                 echo 'Failed to attach file ' . $_FILES['visitor_resume']['name'];
             }
         } else {
