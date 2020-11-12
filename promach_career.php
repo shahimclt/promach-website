@@ -32,9 +32,9 @@ if($_POST) {
 
     if(isset($_POST['visitor_phone'])) {
         $visitor_phone = str_replace(array("\r", "\n", "%0a", "%0d"), '', $_POST['visitor_phone']);
-        $visitor_phone = filter_var($visitor_phone, FILTER_VALIDATE_EMAIL);
+        $visitor_phone = filter_var($visitor_phone, FILTER_SANITIZE_STRING);
         $email_body .= "<div>
-                           <label><b>Email:</b></label>&nbsp;<span>".$visitor_phone."</span>
+                           <label><b>Phone:</b></label>&nbsp;<span>".$visitor_phone."</span>
                         </div>";
     }
       
