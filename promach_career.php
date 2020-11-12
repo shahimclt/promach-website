@@ -12,7 +12,7 @@ if($_POST) {
     $visitor_phone = "";
     $visitor_cover_letter = "";
 
-    $email_title = "Message received through website (careers).";
+    $email_title = "Message received through website (careers)";
     $email_body = "<div>";
       
     if(isset($_POST['visitor_name'])) {
@@ -20,6 +20,7 @@ if($_POST) {
         $email_body .= "<div>
                            <label><b>Name:</b></label>&nbsp;<span>".$visitor_name."</span>
                         </div>";
+        $email_title = $email_title." : ".$visitor_name;
     }
  
     if(isset($_POST['visitor_email'])) {
@@ -79,6 +80,8 @@ if($_POST) {
     //convert HTML into a basic plain-text alternative body
     $mail->msgHTML($email_body);
 
+    echo 'attach: ' . $_FILES['visitor_resume']['name'];
+
     if (array_key_exists('visitor_resume', $_FILES)) {
         // First handle the upload
         // Don't trust provided filename - same goes for MIME types
@@ -90,12 +93,15 @@ if($_POST) {
     
         if (move_uploaded_file($_FILES['visitor_resume']['tmp_name'], $uploadfile)) {
             // Upload handled successfully
-            if (!$mail->addAttachment($uploadfile, 'My uploaded file')) {
-                echo 'Failed to attach file ' . $_FILES['userfile']['name'];
+            if (!$mail->addAttachment($uploadfile, 'Resume_'.$visitor_name.'_'.$visitor_email)) {
+                echo 'Failed to attach file ' . $_FILES['visitor_resume']['name'];
             }
         } else {
             echo 'Failed to move file to ' . $uploadfile;
         }
+    }
+    else {
+        echo 'no attachment';
     }
     //Replace the plain text body with one created manually
     // $mail->AltBody = 'This is a plain-text message body';

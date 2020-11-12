@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-lg-5 offset-lg-1">
                         <h6 class="title_top">Get in Touch</h6>
-                        <form id="messageForm" class="contact_form">
+                        <form id="messageForm" class="contact_form" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="text" name="visitor_name" required class="form-control" placeholder="Name">
                             </div>
@@ -126,6 +126,7 @@
                                     placeholder="Cover Letter"></textarea>
                             </div>
                             <div class="form-group">
+                                <label for="visitor_resume">Attach Resume (Max. 5MB)</label>
                                 <input type="file" name="visitor_resume" required class="form-control" placeholder="Attach Resume (Max. 5MB)">
                             </div>
                             <div class="form-group">
@@ -229,12 +230,17 @@
         $('#messageForm').submit(function( event ) {
             event.preventDefault();
     
-            var dataString = $(this).serialize();
+            // var dataString = $(this).serialize();
+
+            var data = new FormData(this)
             
             $.ajax({
                 type: "POST",
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
                 url: "promach_career.php",
-                data: dataString,
+                data: data,
                 success: function (message) {
                     $('#messageForm').replaceWith(message);
                 }
