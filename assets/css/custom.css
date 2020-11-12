@@ -1,0 +1,63 @@
+html {
+	scroll-behavior: smooth;
+}
+
+#promach_map {
+	width: 100%;
+	height: 350px;
+}
+
+.img_hover::before {
+	background: rgba(1, 63, 153, 0.6);
+}
+
+.oneliner {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.product-table {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.product-table td,
+.product-table th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.product-table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.product-table tr:hover {
+	background-color: #ddd;
+}
+
+.product-table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #ddd;
+	/* color: white; */
+}
+
+.cons_contact_area_four .cons_contact_info_two.bg_gradient {
+    background-image: linear-gradient(90deg, #004098 0%, #086efb 100%);
+}
+
+.footer_top {
+    padding: 80px 0px 80px;
+}
+
+.about-image img {
+	height: 100%;
+	object-fit: cover;
+}
+
+.gallery-item img {
+	object-fit: cover;
+}
