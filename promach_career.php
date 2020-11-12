@@ -70,8 +70,9 @@ if($_POST) {
     //Set an alternative reply-to address
     $mail->addReplyTo('website@promach.in', 'Website Mailer');
     //Set who the message is to be sent to
-    $mail->addAddress($recipient);
-    $mail->addAddress($recipient_cc);
+    // $mail->addAddress($recipient);
+    // $mail->addAddress($recipient_cc);
+    $mail->addAddress('shahim.calicut@gmail.com');
     //Set the subject line
     $mail->Subject = $email_title;
     //Read an HTML message body from an external file, convert referenced images to embedded,
