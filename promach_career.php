@@ -45,7 +45,7 @@ if($_POST) {
                            <div>".$visitor_cover_letter."</div>
                         </div>";
     }
-      
+ 
     // $recipient = "promachindia@gmail.com";
     $recipient = "info@promach.in";
     $recipient_cc = "sujin@promach.in";
@@ -78,6 +78,25 @@ if($_POST) {
     //Read an HTML message body from an external file, convert referenced images to embedded,
     //convert HTML into a basic plain-text alternative body
     $mail->msgHTML($email_body);
+
+    if (array_key_exists('visitor_resume', $_FILES)) {
+        // First handle the upload
+        // Don't trust provided filename - same goes for MIME types
+        // See http://php.net/manual/en/features.file-upload.php#114004 for more thorough upload validation
+        // Extract an extension from the provided filename
+        $ext = PHPMailer::mb_pathinfo($_FILES['visitor_resume']['name'], PATHINFO_EXTENSION);
+        // Define a safe location to move the uploaded file to, preserving the extension
+        $uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $_FILES['visitor_resume']['name'])) . '.' . $ext;
+    
+        if (move_uploaded_file($_FILES['visitor_resume']['tmp_name'], $uploadfile)) {
+            // Upload handled successfully
+            if (!$mail->addAttachment($uploadfile, 'My uploaded file')) {
+                echo 'Failed to attach file ' . $_FILES['userfile']['name'];
+            }
+        } else {
+            echo 'Failed to move file to ' . $uploadfile;
+        }
+    }
     //Replace the plain text body with one created manually
     // $mail->AltBody = 'This is a plain-text message body';
     //Attach an image file
